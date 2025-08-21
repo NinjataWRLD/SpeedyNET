@@ -10,13 +10,13 @@ namespace SpeedyNET.Services.Services;
 
 using static Constants;
 
-
 internal class ServicesService(IServicesEndpoints endpoints) : IServicesService
 {
 	public async Task<CourierServiceModel[]> Services(
 		SpeedyAccount account,
 		DateOnly? date = null,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var response = await endpoints.Services(new(
 			UserName: account.Username,
@@ -35,7 +35,8 @@ internal class ServicesService(IServicesEndpoints endpoints) : IServicesService
 		CalculationRecipientModel recipient,
 		DateOnly? date = null,
 		CalculationSenderModel? sender = null,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var response = await endpoints.DestinationServices(new(
 			UserName: account.Username,

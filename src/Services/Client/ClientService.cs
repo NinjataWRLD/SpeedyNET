@@ -5,12 +5,12 @@ using SpeedyNET.Abstractions.UserConfigs;
 
 namespace SpeedyNET.Services.Client;
 
-
 internal class ClientService(IClientEndpoints endpoints) : IClientService
 {
 	public async Task<long> GetOwnClientIdAsync(
 		SpeedyAccount account,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var response = await endpoints.GetOwnClientIdAsync(new(
 			UserName: account.Username,
@@ -26,7 +26,8 @@ internal class ClientService(IClientEndpoints endpoints) : IClientService
 	public async Task<ClientModel> GetClientAsync(
 		SpeedyAccount account,
 		long clientId,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var response = await endpoints.GetClientAsync(clientId, new(
 			UserName: account.Username,
@@ -56,7 +57,8 @@ internal class ClientService(IClientEndpoints endpoints) : IClientService
 		SpeedyAccount account,
 		long id,
 		string? key = null,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var response = await endpoints.GetContactByExternalIdAsync(id, new(
 			UserName: account.Username,
@@ -80,7 +82,8 @@ internal class ClientService(IClientEndpoints endpoints) : IClientService
 
 	public async Task<ClientModel[]> GetContractClientsAsync(
 		SpeedyAccount account,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var response = await endpoints.GetContractClientsAsync(new(
 			UserName: account.Username,
@@ -104,7 +107,8 @@ internal class ClientService(IClientEndpoints endpoints) : IClientService
 
 	public async Task<ContactInfoModel> ContractInfoAsync(
 		SpeedyAccount account,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var response = await endpoints.ContractInfoAsync(new(
 			UserName: account.Username,
@@ -133,7 +137,8 @@ internal class ClientService(IClientEndpoints endpoints) : IClientService
 		PhoneNumberModel? phone2 = null,
 		string? objectName = null,
 		string? email = null,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var response = await endpoints.CreateContactAsync(new(
 			UserName: account.Username,

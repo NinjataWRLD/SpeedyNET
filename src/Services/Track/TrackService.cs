@@ -6,17 +6,15 @@ using SpeedyNET.Http.Endpoints.Track;
 
 namespace SpeedyNET.Services.Track;
 
-internal class TrackService(
-	ITrackEndpoints endpoints,
-	IShipmentService shipmentService
-) : ITrackService
+internal class TrackService(ITrackEndpoints endpoints, IShipmentService shipmentService) : ITrackService
 {
 	public async Task<TrackedParcelModel[]> TrackAsync(
 		SpeedyAccount account,
 		SpeedyContact contact,
 		string shipmentId,
 		bool? lastOperationOnly = null,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var shipments = await shipmentService.ShipmentInfoAsync(
 			account: account,
@@ -42,7 +40,8 @@ internal class TrackService(
 	public async Task<(long Id, string Url)[]> BulkTrackingDataFiles(
 		SpeedyAccount account,
 		long? lastProcessedFileId = null,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var response = await endpoints.BulkTrackingDataFiles(new(
 			UserName: account.Username,

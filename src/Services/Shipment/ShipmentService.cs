@@ -44,7 +44,8 @@ internal class ShipmentService(
 		string service,
 		string? email,
 		string? phoneNumber,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		int dropoffCountryId = await locationService.GetCountryId(account, country, ct).ConfigureAwait(false);
 		int pickupCountryId = await locationService.GetCountryId(account, pickup.Country, ct).ConfigureAwait(false);
@@ -174,7 +175,8 @@ internal class ShipmentService(
 		SpeedyAccount account,
 		string shipmentId,
 		string comment,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var response = await endpoints.CancelShipmentAsync(new(
 			UserName: account.Username,
@@ -195,7 +197,8 @@ internal class ShipmentService(
 		ShipmentCodFiscalReceiptItemModel[] codFiscalReceiptItems,
 		double declaredValueAmount,
 		double? codAmount = null,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var response = await endpoints.AddParcelShipmentAsync(new(
 			UserName: account.Username,
@@ -216,7 +219,8 @@ internal class ShipmentService(
 	public async Task<WrittenShipmentModel> FinalizePendingShipmentAsync(
 		SpeedyAccount account,
 		string shipmentId,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var response = await endpoints.FinalizePendingShipmentAsync(new(
 			UserName: account.Username,
@@ -240,7 +244,8 @@ internal class ShipmentService(
 		SpeedyAccount account,
 		SpeedyContact contact,
 		string[] shipmentIds,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var response = await endpoints.ShipmentInfoAsync(new(
 			UserName: account.Username,
@@ -258,7 +263,8 @@ internal class ShipmentService(
 		SpeedyAccount account,
 		string shipmentId,
 		ShipmentType[] types,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var response = await endpoints.SecondaryShipmentAsync(shipmentId, new(
 			UserName: account.Username,
@@ -276,7 +282,8 @@ internal class ShipmentService(
 		SpeedyAccount account,
 		string shipmentId,
 		WriteShipmentModel model,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var response = await endpoints.UpdateShipmentAsync(new(
 			UserName: account.Username,
@@ -310,7 +317,8 @@ internal class ShipmentService(
 		SpeedyAccount account,
 		string shipmentId,
 		Dictionary<string, string> properties,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var response = await endpoints.UpdateShipmentPropertiesAsync(new(
 			UserName: account.Username,
@@ -339,7 +347,8 @@ internal class ShipmentService(
 		bool? includeReturns = null,
 		DateTime? fromDateTime = null,
 		DateTime? toDateTime = null,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var response = await endpoints.FindParcelsByRefAsync(new(
 			UserName: account.Username,
@@ -361,7 +370,8 @@ internal class ShipmentService(
 	public async Task HandoverToCourierAsync(
 		SpeedyAccount account,
 		(DateTime DateTime, ShipmentParcelRefModel Parcel)[] parcels,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var response = await endpoints.HandoverToCourierAsync(new(
 			UserName: account.Username,
@@ -377,7 +387,8 @@ internal class ShipmentService(
 	public async Task HandoverToMidwayCarrierAsync(
 		SpeedyAccount account,
 		(DateTime DateTime, ShipmentParcelRefModel Parcel)[] parcels,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var response = await endpoints.HandoverToMidwayCarrierAsync(new(
 			UserName: account.Username,
@@ -393,7 +404,8 @@ internal class ShipmentService(
 	public async Task<BarcodeInformationModel> BarcodeInformationAsync(
 		SpeedyAccount account,
 		ShipmentParcelRefModel parcel,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var response = await endpoints.BarcodeInformationAsync(new(
 			UserName: account.Username,

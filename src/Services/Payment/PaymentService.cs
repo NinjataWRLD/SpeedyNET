@@ -14,7 +14,8 @@ internal class PaymentService(IPaymentEndpoints endpoints) : IPaymentService
 		DateTime fromDate,
 		DateTime toDate,
 		bool? includeDetails = null,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var response = await endpoints.Payout(new(
 			UserName: account.Username,

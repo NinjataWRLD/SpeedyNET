@@ -11,10 +11,7 @@ using SpeedyNET.Abstractions.UserConfigs;
 
 namespace SpeedyNET.Services.Print;
 
-internal class PrintService(
-	IPrintEndpoints endpoints,
-	IShipmentService shipmentService
-) : IPrintService
+internal class PrintService(IPrintEndpoints endpoints, IShipmentService shipmentService) : IPrintService
 {
 	public async Task<byte[]> PrintAsync(
 		SpeedyAccount account,
@@ -25,7 +22,8 @@ internal class PrintService(
 		Dpi dpi = Dpi.dpi203,
 		AdditionalWaybillSenderCopy additionalWaybillSenderCopy = AdditionalWaybillSenderCopy.NONE,
 		string? printerName = null,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var shipments = await shipmentService.ShipmentInfoAsync(
 			account: account,
@@ -63,7 +61,8 @@ internal class PrintService(
 		Dpi dpi = Dpi.dpi203,
 		AdditionalWaybillSenderCopy additionalWaybillSenderCopy = AdditionalWaybillSenderCopy.NONE,
 		string? printerName = null,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var shipments = await shipmentService.ShipmentInfoAsync(
 			account: account,
@@ -96,7 +95,8 @@ internal class PrintService(
 	public async Task<LabelInfoModel[]> LabelInfoAsync(
 		SpeedyAccount account,
 		ShipmentParcelRefModel[] parcels,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var response = await endpoints.LabelInfoAsync(new(
 			UserName: account.Username,
@@ -116,7 +116,8 @@ internal class PrintService(
 		string? printerName = null,
 		PaperFormat format = PaperFormat.pdf,
 		Dpi dpi = Dpi.dpi203,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		var response = await endpoints.PrintVoucherAsync(new(
 			UserName: account.Username,

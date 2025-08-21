@@ -13,7 +13,8 @@ internal class ValidationService(IValidationEndpoints endpoints) : IValidationSe
 	public async Task<bool> ValidateAddress(
 		SpeedyAccount account,
 		ShipmentAddressModel address,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		ValidationResponse response = await endpoints.ValidateAddress(new(
 			UserName: account.Username,
@@ -31,7 +32,8 @@ internal class ValidationService(IValidationEndpoints endpoints) : IValidationSe
 		SpeedyAccount account,
 		string postCode,
 		long? siteId = null,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		ValidationResponse response = await endpoints.ValidatePostCode(new(
 			UserName: account.Username,
@@ -50,7 +52,8 @@ internal class ValidationService(IValidationEndpoints endpoints) : IValidationSe
 	public async Task<bool> ValidatePhone(
 		SpeedyAccount account,
 		PhoneNumberModel phoneNumber,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		ValidationResponse response = await endpoints.ValidatePhone(new(
 			UserName: account.Username,
@@ -68,7 +71,8 @@ internal class ValidationService(IValidationEndpoints endpoints) : IValidationSe
 	public async Task<bool> ValidateShipment(
 		SpeedyAccount account,
 		WriteShipmentModel shipment,
-		CancellationToken ct = default)
+		CancellationToken ct = default
+	)
 	{
 		ValidationResponse response = await endpoints.ValidateShipment(new(
 			UserName: account.Username,
