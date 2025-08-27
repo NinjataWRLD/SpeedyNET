@@ -16,6 +16,14 @@ jobs:
               with:
                   dotnet-version: "9.0.x"
 
+            - name: Update versions
+              run: |
+                  VERSION=$(git describe --tags --abbrev=0 | sed 's/^v//')
+                  echo "VERSION=$VERSION" >> $GITHUB_ENV
+                  for csproj in src/*/SpeedyNET.*.csproj; do
+                    sed -i "s#<Version>.*</Version>#<Version>$VERSION</Version>#g" "$csproj"
+                  done
+
             - name: Restore dependencies
               run: dotnet restore
 
