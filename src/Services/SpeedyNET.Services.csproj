@@ -7,6 +7,16 @@
       <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     </PropertyGroup>
 
+	<PropertyGroup>
+		<PackageId>SpeedyNET.Services</PackageId>
+		<Version>1.0.1</Version>
+		<Authors>NinjataWRLD</Authors>
+		<Description>The services aggregated in SpeedyNET.Sdk</Description>
+		<PackageTags>Speedy;Delivery;SDK</PackageTags>
+		<RepositoryUrl>https://github.com/NinjataWRLD/SpeedyNET</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	</PropertyGroup>
+
     <ItemGroup>
       <ProjectReference Include="../Http/SpeedyNET.Http.csproj" />
       <ProjectReference Include="../Abstractions/SpeedyNET.Abstractions.csproj" />

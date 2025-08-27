@@ -6,4 +6,14 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<PackageId>SpeedyNET.Core</PackageId>
+		<Version>1.0.1</Version>
+		<Authors>NinjataWRLD</Authors>
+		<Description>Core enums and constants for SpeedyNET</Description>
+		<PackageTags>Speedy;Delivery;SDK</PackageTags>
+		<RepositoryUrl>https://github.com/NinjataWRLD/SpeedyNET</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	</PropertyGroup>
+
 </Project>

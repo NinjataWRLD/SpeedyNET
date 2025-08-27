@@ -7,6 +7,16 @@
       <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<PackageId>SpeedyNET.Http</PackageId>
+		<Version>1.0.1</Version>
+		<Authors>NinjataWRLD</Authors>
+		<Description>The Refit interfaces for the API</Description>
+		<PackageTags>Speedy;Delivery;SDK</PackageTags>
+		<RepositoryUrl>https://github.com/NinjataWRLD/SpeedyNET</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<PackageReference Include="Refit.HttpClientFactory" Version="8.0.0" />
 	</ItemGroup>
