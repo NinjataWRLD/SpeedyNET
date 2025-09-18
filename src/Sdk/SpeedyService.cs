@@ -519,14 +519,14 @@ internal class SpeedyService(
 			ct: ct
 		).ConfigureAwait(false);
 
-	public async Task<TrackedParcelModel[]> TrackAsync(
-		string shipmentId,
+	public async Task<Dictionary<string, ICollection<TrackedParcelModel>>> TrackAsync(
+		string[] shipmentIds,
 		bool? lastOperationOnly = null,
 		CancellationToken ct = default
 	) => await track.TrackAsync(
 			account: options.Account,
 			contact: options.Contact,
-			shipmentId: shipmentId,
+			shipmentIds: shipmentIds,
 			lastOperationOnly: lastOperationOnly,
 			ct: ct
 		).ConfigureAwait(false);

@@ -98,7 +98,7 @@ public interface ISpeedyService
 
 	#region Track
 	Task<(long Id, string Url)[]> BulkTrackingDataFiles(long? lastProcessedFileId = null, CancellationToken ct = default);
-	Task<TrackedParcelModel[]> TrackAsync(string shipmentId, bool? lastOperationOnly = null, CancellationToken ct = default);
+	Task<Dictionary<string, ICollection<TrackedParcelModel>>> TrackAsync(string[] shipmentIds, bool? lastOperationOnly = null, CancellationToken ct = default);
 	#endregion
 
 	#region Validation
