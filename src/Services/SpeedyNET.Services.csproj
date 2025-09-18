@@ -9,7 +9,7 @@
 
 	<PropertyGroup>
 		<PackageId>SpeedyNET.Services</PackageId>
-		<Version>1.0.1</Version>
+		<Version>0.0.0</Version>
 		<Authors>NinjataWRLD</Authors>
 		<Description>The services aggregated in SpeedyNET.Sdk</Description>
 		<PackageTags>Speedy;Delivery;SDK</PackageTags>

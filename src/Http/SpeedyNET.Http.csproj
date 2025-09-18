@@ -9,7 +9,7 @@
 
 	<PropertyGroup>
 		<PackageId>SpeedyNET.Http</PackageId>
-		<Version>1.0.1</Version>
+		<Version>0.0.0</Version>
 		<Authors>NinjataWRLD</Authors>
 		<Description>The Refit interfaces for the API</Description>
 		<PackageTags>Speedy;Delivery;SDK</PackageTags>

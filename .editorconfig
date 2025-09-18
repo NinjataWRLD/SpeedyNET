@@ -4,7 +4,7 @@
 root = true
 
 
-[*]
+[*.cs]
 # Indentation and spacing
 indent_size = 4
 indent_style = tab
