@@ -1,7 +1,8 @@
-﻿using SpeedyNET.Http.Dtos.TrackedParcel;
-using SpeedyNET.Http.Dtos.TrackedParcel.TrackedParcelOperation;
-using SpeedyNET.Abstractions.Contracts.Track;
+﻿using SpeedyNET.Abstractions.Contracts.Track;
 using SpeedyNET.Core;
+using SpeedyNET.Http.Dtos.TrackedParcel;
+using SpeedyNET.Http.Dtos.TrackedParcel.ExternalCarrierParcelNumberDetails;
+using SpeedyNET.Http.Dtos.TrackedParcel.TrackedParcelOperation;
 
 namespace SpeedyNET.Services.Track;
 
@@ -11,21 +12,25 @@ internal static class Mapper
 		=> new(
 			ParcelId: dto.ParcelId,
 			ExternalCarrierParcelNumbers: dto.ExternalCarrierParcelNumbers,
-			Operations: [.. dto.Operations.Select(o => o.ToModel())],
 			ExternalCarrierParcelNumbersDetails: dto.ExternalCarrierParcelNumbersDetails?.ToDictionary(
-					kv => kv.Key,
-					kv => (
-						kv.Value.ExternalCarrierId,
-						kv.Value.ExternalCarrierName,
-						kv.Value.TrackAndTraceUrl
-					)
-				)
+				x => x.Key,
+				x => x.Value.ToModel()
+			),
+			Operations: [.. dto.Operations.Select(x => x.ToModel())]
+		);
+
+	internal static ExternalCarrierParcelNumberDetailsModel ToModel(this ExternalCarrierParcelNumberDetailsDto dto)
+		=> new(
+			ExternalCarrierId: dto.ExternalCarrierId,
+			ExternalCarrierName: dto.ExternalCarrierName,
+			TrackAndTraceUrl: dto.TrackAndTraceUrl
 		);
 
 	internal static TrackedParcelOperationModel ToModel(this TrackedParcelOperationDto dto)
 		=> new(
 			DateTime: dto.DateTime.ParseDateTime(),
-			OperationCode: dto.OperationCode,
+			Operation: dto.TranslateOperation(),
+			IsDelivered: dto.OperationCode is TrackCodeTranslator.DeliveredCode,
 			Description: dto.Description,
 			Place: dto.Place,
 			Comment: dto.Comment,

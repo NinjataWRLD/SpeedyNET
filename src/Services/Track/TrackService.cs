@@ -13,7 +13,6 @@ namespace SpeedyNET.Services.Track;
 
 internal class TrackService(ITrackEndpoints endpoints, IShipmentService shipmentService) : ITrackService
 {
-
 	public async Task<(long Id, string Url)[]> BulkTrackingDataFiles(
 		SpeedyAccount account,
 		long? lastProcessedFileId = null,
@@ -91,18 +90,16 @@ internal class TrackService(ITrackEndpoints endpoints, IShipmentService shipment
 
 		foreach (TrackedParcelDto trackedParcel in trackedParcels)
 		{
-			(string Id, ShipmentParcelModel[] Parcels) = shipmentsParcels.First(
-				x => x.Value.Any(x => x.Id == trackedParcel.ParcelId)
-			);
+			(string Id, ShipmentParcelModel[] Parcels) = shipmentsParcels
+				.First(x => x.Value.Any(x => x.Id == trackedParcel.ParcelId));
 
-			if (shipmentsTracks.TryGetValue(Id, out ICollection<TrackedParcelModel>? tracks))
+			if (!shipmentsTracks.TryGetValue(Id, out ICollection<TrackedParcelModel>? tracks))
 			{
-				tracks.Add(trackedParcel.ToModel());
+				tracks = [];
+				shipmentsTracks.Add(Id, tracks);
 			}
-			else
-			{
-				shipmentsTracks.Add(Id, [trackedParcel.ToModel()]);
-			}
+
+			tracks.Add(trackedParcel.ToModel());
 		}
 
 		return shipmentsTracks;

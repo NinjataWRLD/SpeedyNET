@@ -1,17 +1,19 @@
-﻿using SpeedyNET.Abstractions.Contracts.Track;
+﻿using SpeedyNET.Http.Dtos.TrackedParcel.TrackedParcelOperation;
 
 namespace SpeedyNET.Services;
 
-public static class TrackCodeTranslator
+internal static class TrackCodeTranslator
 {
-	public static string Translate(this TrackedParcelOperationModel operation)
+	internal const int DeliveredCode = -14;
+
+	internal static string TranslateOperation(this TrackedParcelOperationDto operation)
 		=> operation.OperationCode switch
 		{
 			1 => "Arrival Scan",
 			2 => "Departure Scan",
 			11 => "Received in Office",
 			12 => "Out for Delivery",
-			-14 => "Delivered",
+			DeliveredCode => "Delivered",
 			21 => "Processed in Office",
 			38 => "Returned to Office",
 			39 => "Courier Pick-up",
