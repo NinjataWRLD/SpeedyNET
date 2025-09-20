@@ -102,8 +102,8 @@ public interface ISpeedyService
 	#endregion
 
 	#region Validation
-	Task<bool> ValidateAddress(ShipmentAddressModel address, CancellationToken ct = default);
-	Task<bool> ValidatePhone(PhoneNumberModel phoneNumber, CancellationToken ct = default);
+	Task<bool> ValidateAddress(string country, string city, string street, CancellationToken ct = default);
+	Task<bool> ValidatePhone(string phone, CancellationToken ct = default);
 	Task<bool> ValidatePostCode(string postCode, long? siteId = null, CancellationToken ct = default);
 	Task<bool> ValidateShipment(WriteShipmentModel shipment, CancellationToken ct = default);
 	#endregion

@@ -534,20 +534,24 @@ internal class SpeedyService(
 
 	#region Validation
 	public async Task<bool> ValidateAddress(
-		ShipmentAddressModel address,
+		string country,
+		string city,
+		string street,
 		CancellationToken ct = default
 	) => await validation.ValidateAddress(
 			account: options.Account,
-			address: address,
+			country: country,
+			city: city,
+			street: street,
 			ct: ct
 		).ConfigureAwait(false);
 
 	public async Task<bool> ValidatePhone(
-		PhoneNumberModel phoneNumber,
+		string phone,
 		CancellationToken ct = default
 	) => await validation.ValidatePhone(
 			account: options.Account,
-			phoneNumber: phoneNumber,
+			phone: phone,
 			ct: ct
 		).ConfigureAwait(false);
 

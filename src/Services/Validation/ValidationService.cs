@@ -2,26 +2,56 @@
 using SpeedyNET.Abstractions.Contracts.Shipment;
 using SpeedyNET.Services.Mappers.Shipment;
 using SpeedyNET.Services;
-using SpeedyNET.Abstractions.Models;
 using SpeedyNET.Http.Endpoints.Validation;
 using SpeedyNET.Abstractions.UserConfigs;
+using SpeedyNET.Abstractions.Contracts.Location;
 
 namespace SpeedyNET.Services.Validation;
 
-internal class ValidationService(IValidationEndpoints endpoints) : IValidationService
+internal class ValidationService(
+	IValidationEndpoints endpoints,
+	ILocationService locationService
+) : IValidationService
 {
 	public async Task<bool> ValidateAddress(
 		SpeedyAccount account,
-		ShipmentAddressModel address,
+		string country,
+		string site,
+		string street,
 		CancellationToken ct = default
 	)
 	{
+		int countryId = await locationService.GetCountryId(account, country, ct);
+		long siteId = await locationService.GetSiteId(account, countryId, site, ct);
+		long streetId = await locationService.GetStreetId(account, countryId, street, ct);
+
 		ValidationResponse response = await endpoints.ValidateAddress(new(
 			UserName: account.Username,
 			Password: account.Password,
 			Language: account.Language,
 			ClientSystemId: account.ClientSystemId,
-			Address: address.ToDto()
+			Address: new(
+				CountryId: countryId,
+				PostCode: null,
+				SiteId: siteId,
+				SiteType: null,
+				SiteName: null,
+				ComplexId: null,
+				ComplexType: null,
+				ComplexName: null,
+				StreetId: streetId,
+				StreetType: null,
+				StreetName: null,
+				StreetNo: null,
+				BlockNo: null,
+				EntranceNo: null,
+				FloorNo: null,
+				ApartmentNo: null,
+				PoiId: null,
+				AddressNote: null,
+				X: null,
+				Y: null
+			)
 		), ct).ConfigureAwait(false);
 
 		response.Error.EnsureNull();
@@ -51,7 +81,7 @@ internal class ValidationService(IValidationEndpoints endpoints) : IValidationSe
 
 	public async Task<bool> ValidatePhone(
 		SpeedyAccount account,
-		PhoneNumberModel phoneNumber,
+		string phone,
 		CancellationToken ct = default
 	)
 	{
@@ -60,8 +90,8 @@ internal class ValidationService(IValidationEndpoints endpoints) : IValidationSe
 			Password: account.Password,
 			Language: account.Language,
 			ClientSystemId: account.ClientSystemId,
-			Number: phoneNumber.Number,
-			Ext: phoneNumber.Extension
+			Number: phone,
+			Ext: null
 		), ct).ConfigureAwait(false);
 
 		response.Error.EnsureNull();
