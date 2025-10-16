@@ -23,7 +23,7 @@ internal class ValidationService(
 	{
 		int countryId = await locationService.GetCountryId(account, country, ct);
 		long siteId = await locationService.GetSiteId(account, countryId, site, ct);
-		long streetId = await locationService.GetStreetId(account, countryId, street, ct);
+		long streetId = await locationService.GetStreetId(account, siteId, street, ct);
 
 		ValidationResponse response = await endpoints.ValidateAddress(new(
 			UserName: account.Username,
