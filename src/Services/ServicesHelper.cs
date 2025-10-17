@@ -91,4 +91,11 @@ internal static class ServicesHelper
 
 		return services.First(s => s.Name == service || s.NameEn == service).Id;
 	}
+
+	internal static void Discombobulate(this string street, out string name, out string number)
+	{
+		string[] tokens = street.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+		number = tokens[^1];
+		name = string.Join(' ', tokens.Take(tokens.Length - 1));
+	}
 }

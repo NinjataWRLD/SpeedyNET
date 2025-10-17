@@ -32,8 +32,11 @@ internal class CalculationService(
 		long dropoffSiteId = await locationService.GetSiteId(account, dropoffCountryId, site, ct).ConfigureAwait(false);
 		long pickupSiteId = await locationService.GetSiteId(account, pickupCountryId, pickup.City, ct).ConfigureAwait(false);
 
-		long dropoffStreetId = await locationService.GetStreetId(account, dropoffSiteId, street, ct).ConfigureAwait(false);
-		long pickupStreetId = await locationService.GetStreetId(account, pickupSiteId, pickup.Street, ct).ConfigureAwait(false);
+		street.Discombobulate(out string dropoffStreetName, out string _);
+		pickup.Street.Discombobulate(out string pickupStreetName, out string _);
+
+		long dropoffStreetId = await locationService.GetStreetId(account, dropoffSiteId, dropoffStreetName, ct).ConfigureAwait(false);
+		long pickupStreetId = await locationService.GetStreetId(account, pickupSiteId, pickupStreetName, ct).ConfigureAwait(false);
 
 		var dropoffOffice = await locationService.GetOfficeId(account, dropoffCountryId, dropoffSiteId, dropoffStreetId, ct).ConfigureAwait(false);
 		var pickupOffice = await locationService.GetOfficeId(account, pickupCountryId, pickupSiteId, pickupStreetId, ct).ConfigureAwait(false);

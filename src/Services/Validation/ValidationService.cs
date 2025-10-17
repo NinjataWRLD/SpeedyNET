@@ -21,7 +21,7 @@ internal class ValidationService(
 		CancellationToken ct = default
 	)
 	{
-		DiscombobulateStreet(street, out string streetName, out string streetNumber);
+		street.Discombobulate(out string streetName, out string streetNumber);
 		int countryId = await locationService.GetCountryId(account, country, ct);
 		long siteId = await locationService.GetSiteId(account, countryId, site, ct);
 		long streetId = await locationService.GetStreetId(account, siteId, streetName, ct);
@@ -125,12 +125,5 @@ internal class ValidationService(
 
 		response.Error.EnsureNull();
 		return response.Valid ?? false;
-	}
-
-	private static void DiscombobulateStreet(string street, out string name, out string number)
-	{
-		string[] tokens = street.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-		number = tokens[^1];
-		name = string.Join(' ', tokens.Take(tokens.Length - 1));
 	}
 }
