@@ -6,35 +6,35 @@ namespace SpeedyNET.Services;
 
 internal static class ServicesHelper
 {
-	internal static async Task<int> GetCountryId(this ILocationService locationService, SpeedyAccount account, string country, CancellationToken ct)
+	internal static async Task<int> GetCountryId(this ILocationService locationService, SpeedyAccount account, string name, CancellationToken ct)
 	{
 		CountryModel[] countries = await locationService.FindCountryAsync(
 			account: account,
-			name: country,
+			name: name,
 			ct: ct
 		).ConfigureAwait(false);
 
 		return countries.First().Id;
 	}
 
-	internal static async Task<long> GetSiteId(this ILocationService locationService, SpeedyAccount account, int countryId, string site, CancellationToken ct)
+	internal static async Task<long> GetSiteId(this ILocationService locationService, SpeedyAccount account, int countryId, string name, CancellationToken ct)
 	{
 		SiteModel[] sites = await locationService.FindSiteAsync(
 			account: account,
 			countryId: countryId,
-			name: site,
+			name: name,
 			ct: ct
 		).ConfigureAwait(false);
 
 		return sites.First().Id;
 	}
 
-	internal static async Task<long> GetStreetId(this ILocationService locationService, SpeedyAccount account, long siteId, string street, CancellationToken ct)
+	internal static async Task<long> GetStreetId(this ILocationService locationService, SpeedyAccount account, long siteId, string name, CancellationToken ct)
 	{
 		StreetModel[] streets = await locationService.FindStreetAsync(
 			account: account,
 			siteId: Convert.ToInt32(siteId),
-			name: street,
+			name: name,
 			type: null,
 			ct: ct
 		).ConfigureAwait(false);

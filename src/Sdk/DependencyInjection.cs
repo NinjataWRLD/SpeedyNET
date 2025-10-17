@@ -27,21 +27,19 @@ using SpeedyNET.Services.Validation;
 public static class DependencyInjection
 {
 	public static IServiceCollection AddSpeedyService(this IServiceCollection services, Func<IServiceProvider, SpeedyOptions> optionsFunc)
-	{
-		return services
-				.AddSpeedyShipment()
-				.AddSpeedyPrint()
-				.AddSpeedyTrack()
-				.AddSpeedyPickup()
-				.AddSpeedyLocation()
-				.AddSpeedyCalculation()
-				.AddSpeedyClient()
-				.AddSpeedyValidation()
-				.AddSpeedyServices()
-				.AddSpeedyPayment()
-				.AddScoped(optionsFunc)
-				.AddScoped<ISpeedyService, SpeedyService>();
-	}
+		=> services
+			.AddSpeedyShipment()
+			.AddSpeedyPrint()
+			.AddSpeedyTrack()
+			.AddSpeedyPickup()
+			.AddSpeedyLocation()
+			.AddSpeedyCalculation()
+			.AddSpeedyClient()
+			.AddSpeedyValidation()
+			.AddSpeedyServices()
+			.AddSpeedyPayment()
+			.AddScoped(optionsFunc)
+			.AddScoped<ISpeedyService, SpeedyService>();
 
 	private static IServiceCollection AddSpeedyShipment(this IServiceCollection services)
 	{
